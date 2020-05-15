@@ -1,0 +1,14 @@
+﻿@model MasjidProjectV2.Models.ApplicationUser
+
+@{
+    ViewBag.Title = "Account activation by admin";
+}
+
+<h2>@ViewBag.Title.</h2>
+<div>
+    <p>
+        The user with email @Model.Email has been activated by an admin. Confirmation link has been sent to the user.
+        
+        AccountStatus = @Model.AccountStatus (@((int) Model.AccountStatus))
+    </p>
+</div>

@@ -1,0 +1,47 @@
+﻿@model System.Linq.IQueryable<MasjidProjectV2.Models.ApplicationUser>
+
+@{
+    ViewBag.Title = "Brugeroprettelser";
+}
+
+<h2 style="margin-bottom: 50px">Brugeroprettelser</h2>
+
+<table id="pendingUsers" class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Bruger-id</th>
+            <th>Email</th>
+            <th>Oprettet</th>
+            <th></th>
+            <th class="delete-x"></th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.Id</td>
+                <td>@user.Email</td>
+                <td>@user.CreatedAt</td>
+
+                <td>
+                    @Html.ActionLink("Opret", "RegisterByAdmin", "UserRegistrations", new { id = user.Id }, new { onclick = "return confirm('Er du sikker på at du vil oprette denne bruger?');" })
+                </td>
+                <td>
+                    @Html.ActionLink("Slet", "DeleteByAdmin", "UserRegistrations", new { id = user.Id }, new { onclick = "return confirm('Er du sikker på at du vil slette denne bruger?');" })
+                </td>
+            </tr>
+        }
+    </tbody>
+
+
+</table>
+
+@section scripts {
+    <script>
+        $(document).ready(function() {
+            var table = $("#pendingUsers").DataTable();
+        });
+    </script>
+}

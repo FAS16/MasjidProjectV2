@@ -1,0 +1,57 @@
+﻿@model MasjidProjectV2.Models.UsersViewModel
+
+@{
+    ViewBag.Title = "Brugere";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<table id="users" class="table table-bordered table-hover">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Email</th>
+        <th>Fulde navn</th>
+        <th>Tlf.nr.</th>
+        <th>By</th>
+        <th>Postnr.</th>
+        <th>Alder</th>
+        <th>Fødselsdag</th>
+        <th></th>
+        <th class="delete-x"></th>
+    </tr>
+    </thead>
+    <tbody>
+
+    @foreach (var user in Model.Users)
+    {
+        <tr>
+            <td>@user.Id</td>
+            <td>@user.Email</td>
+            <td>@user.FirstName @user.LastName</td>
+            <td>@user.PhoneNumber</td>
+            <td>@user.City</td>
+            <td>@user.ZipCode</td>
+            <td>@Model.CalculateAge(user)</td>
+            <td>@user.DateOfBirth.ToShortDateString()</td>
+
+            <td>
+                @Html.ActionLink("Rediger", "Edit", "Users", new { id = user.Id }, new { onclick = "return confirm('Er du sikker på at du vil oprette denne bruger?');" })
+            </td>
+            <td>
+                @Html.ActionLink("Slet", "DeleteByAdmin", "UserRegistrations", new { id = user.Id }, new { onclick = "return confirm('Er du sikker på at du vil slette denne bruger?');" })
+            </td>
+        </tr>
+    }
+    </tbody>
+
+
+</table>
+
+@section scripts {
+    <script>
+        $(document).ready(function() {
+            var table = $("#users").DataTable();
+        });
+    </script>
+}

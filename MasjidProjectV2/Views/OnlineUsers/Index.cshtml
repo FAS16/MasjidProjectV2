@@ -1,0 +1,29 @@
+﻿@model dynamic
+
+@{
+    ViewBag.Title = "Online brugere";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div class="row">
+    Antal online brugere <strong id ="counter"></strong>
+    
+    <script src="@Url.Content("~/Scripts/jquery-3.4.1.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/jquery.signalR-2.4.1.min.js")"></script>
+    <script src="@Url.Content("hubs")"></script>
+    <script>
+        $(function() {
+            //Setup hubs
+            var userHub = $.connection.UserHub;
+            $.connection.hub.start().done(function() {
+                // Todo: Do something after hub connected
+            });
+            // Function to recieve data from server. Server call in on code behind.
+            userHub.client.UpdateCount = function(count) {
+                $("#counter").text(count);
+            }
+        });
+    </script>
+
+</div>
