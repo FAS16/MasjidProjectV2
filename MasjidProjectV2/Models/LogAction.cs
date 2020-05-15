@@ -18,6 +18,6 @@ namespace MasjidProjectV2.Models
         PasswordChangeFailure = 8,
         EmailConfirmation = 9,
         UserRegistrationAccept = 10,
-        UserRegistrationDecline = 11
+        UserRegistrationDecline = 12
     }
 }
